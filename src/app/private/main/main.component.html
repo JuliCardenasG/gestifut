@@ -1,6 +1,6 @@
 <section class="main">
   <div class="row col-12">
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-sm-8">
       <div class="row">
         <h2>{{user.name}}</h2>
       </div>
@@ -17,7 +17,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{tournament.name}}</h5>
                 <p class="card-text">{{tournament.description}}</p>
-                <a href="#" class="btn btn-secondary">Ir al torneo</a>
+                <a class="btn btn-secondary">Ir al torneo</a>
               </div>
             </div>
           </div>
@@ -28,19 +28,21 @@
           </div>
         </div>
         <div>
-          <button class="btn btn-primary">Crear torneo</button>
+          <a [routerLink]="['tournaments/create']" class="btn btn-primary">Crear torneo</a>
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-4 mt-4 mt-md-0 text-center">
+    <div class="col-12 col-sm-4 mt-4 mt-md-0 text-center">
       <div class="row">
-        <img [src]="IMG_SERVER + user.image" class="img-avatar mx-auto">
+        <div class="row col-12">
+          <img [src]="IMG_SERVER + user.image" class="img-avatar mx-auto">
+        </div>
       </div>
-      <div class="row">
-        <div class="row col-12 ml-4">
+      <div class="row mt-4">
+        <div class="row col-12">
           <button class="btn btn-success mx-auto">Editar perfil</button>
         </div>
-        <div class="row col-12 mt-2 ml-4">
+        <div class="row col-12 mt-2">
           <button class="btn btn-danger mx-auto">Borrar perfil</button>
         </div>
       </div>
