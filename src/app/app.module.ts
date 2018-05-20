@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, PreloadAllModules } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
+import { APP_ROUTES } from './app.routes';
 
 
 @NgModule({
@@ -10,7 +12,11 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(APP_ROUTES, {
+      preloadingStrategy: PreloadAllModules,
+      useHash: true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
