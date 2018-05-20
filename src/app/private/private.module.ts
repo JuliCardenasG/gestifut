@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { LayoutComponent } from './layout/layout.component';
+import { TopMenuComponent } from './top-menu/top-menu.component';
+import { MainComponent } from './main/main.component';
+import { UserResolverService } from '../user/resolvers/user-resolver.service';
+import { TournamentsResolverService } from './tournament/resolvers/tournaments-resolver.service';
 
 @NgModule({
   imports: [
@@ -8,11 +13,34 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild(
       [
         {
-          path: ''
+          path: '',
+          component: LayoutComponent,
+          children: [
+            {
+              path: '',
+              component: MainComponent,
+              resolve: {
+                user: UserResolverService,
+                tournaments: TournamentsResolverService
+              }
+            },
+            {
+              path: 'tournaments',
+              loadChildren: './tournament/tournament.module#TournamentModule'
+            },
+            {
+              path: 'teams',
+              loadChildren: './team/team.module#TeamModule',
+            },
+            {
+              path: 'players',
+              loadChildren: './player/player.module#PlayerModule'
+            }
+          ]
         }
       ]
     )
   ],
-  declarations: []
+  declarations: [LayoutComponent, TopMenuComponent, MainComponent]
 })
 export class PrivateModule { }

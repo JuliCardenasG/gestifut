@@ -1,3 +1,31 @@
-<p>
-  register works!
-</p>
+<div class="container container-fluid">
+  <form id="form-register" class="mt-4" role="form" (ngSubmit)="register()" #registerForm="ngForm">
+    <legend>Registrarse en GestiSport</legend>
+
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="name" name="nameUser" placeholder="Nombre" required minlength="3">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" placeholder="Email" required minlength="5">
+    </div>
+    <div class="form-group">
+      <label for="password">Contraseña:</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" placeholder="Contraseña"
+        required>
+      <div class="invalid-feedback">Password is required and must be at least 4 characters long</div>
+    </div>
+    <div class="form-group">
+      <label for="image">Imagen</label>
+      <input id="file" placeholder="Upload file" (change)="imageChange($event)" name="image" accept=".jpg,.jpeg,.png,.svg" type="file"
+        class="form-control">
+    </div>
+    <img [src]="image" class="img-preview" *ngIf="image">
+    <div class="alert alert-danger" *ngIf="errorMsg">
+      <p>{{errorMsg}}</p>
+
+    </div>
+    <input type="submit" [disabled]="registerForm.invalid" value="Registrarse" class="btn btn-primary">
+  </form>
+</div>

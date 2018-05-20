@@ -13,7 +13,7 @@ import { IServerResponse } from '../interfaces/i-server-response';
 @Injectable()
 export class AuthService {
 
-  @Output() loggedUser: EventEmitter<IUser> = new EventEmitter();
+  loggedUser: IUser;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -33,7 +33,7 @@ export class AuthService {
     return this.http.get(SERVER_URL + 'auth/user')
       .map((response: IServerResponse) => {
         if (response.ok) {
-          this.loggedUser.emit(response.user);
+          this.loggedUser = response.user;
           return response.user;
         }
       })
@@ -42,7 +42,7 @@ export class AuthService {
 
   isLogged(): Observable<boolean> {
     if (!localStorage.getItem('token')) {
-      return Observable.of(false)
+      return Observable.of(false);
     }
     return this.http.get(SERVER_URL + 'auth/token')
       .map((response: IServerResponse) => {
@@ -62,19 +62,19 @@ export class AuthService {
         }
       })
       .catch(err => {
-        if(err.status == 0) {
+        if (err.status === 0) {
           return Observable.throw('No hay conexión a la red. Inténtalo de nuevo más tarde');
         }
-        if (err.status == 400) {
+        if (err.status === 400) {
           return Observable.throw('Email duplicado. Prueba a iniciar sesión');
         }
         return Observable.throw('Error al hacer login. Inténtalo de nuevo más tarde');
-      })
+      });
   }
 
   logout() {
     localStorage.removeItem('token');
-    this.loggedUser.emit(null);
+    this.loggedUser = null;
     this.router.navigate(['/']);
   }
 }

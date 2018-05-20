@@ -1,7 +1,5 @@
 import { IUser } from '../user/interfaces/i-user';
-
-// import { ISport } from "../sport/interfaces/i-sport";
-// import { ITournament } from "../tournament/interfaces/i-tournament";
+import { ITournament } from '../private/tournament/interfaces/i-tournament';
 
 export interface IServerResponse {
     ok: boolean;
@@ -11,12 +9,7 @@ export interface IServerResponse {
     userId?: number;
 }
 
-// export interface ISportResponse extends IServerResponse {
-//     sport?: ISport;
-//     sports?: ISport[];
-// }
-
-// export interface ITournamentResponse extends IServerResponse {
-//     tournament?: ITournament;
-//     tournaments?: ITournament[];
-// }
+export interface ITournamentResponse extends IServerResponse {
+    tournament?: ITournament;
+    tournaments?: ITournament[];
+}

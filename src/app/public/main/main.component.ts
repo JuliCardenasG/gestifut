@@ -14,10 +14,10 @@ export class MainComponent implements OnInit {
   }
 
   login() {
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/login']);
   }
 
   register() {
-    this.router.navigate(['/auth/register']);
+    this.router.navigate(['/register']);
   }
 }

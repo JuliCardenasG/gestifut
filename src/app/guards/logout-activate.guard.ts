@@ -13,9 +13,10 @@ export class LogoutActivateGuard implements CanActivate {
     return this.authService.isLogged()
       .map(ok => {
         if (ok) {
-          this.router.navigate(['/accounts'])
+          console.log('Navigaste');
+          this.router.navigate(['/private']);
         }
-        //Si el usuario está logueado, no se le permite acceder a la página de Login (y viceversa)
+        // Si el usuario está logueado, no se le permite acceder a la página de Login (y viceversa)
         return !ok;
       })
       .catch(err => {
