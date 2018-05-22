@@ -1,4 +1,4 @@
-<form id="form-register" class="mt-4" role="form" (ngSubmit)="createTournament()" #createTournamentForm="ngForm">
+<form id="form-register" class="mt-4" role="form" #createTournamentForm="ngForm">
   <legend>Crear un torneo</legend>
 
   <div class="form-group">
@@ -7,34 +7,55 @@
   </div>
   <div class="form-group">
     <label for="description">Descripción</label>
+    <textarea name="description" id="" cols="20" rows="5" [(ngModel)]="description" class="form-control"></textarea>
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="isPublic" name="checkbox">
+    <label class="form-check-label" for="exampleCheck1" >Torneo público</label>
+    <p><small>Al hacer público un torneo puedes compartir los resultados con otras personas</small></p>
+  </div>
+  <div class="form-group">
+    <label for="image">Imagen de torneo</label>
+    <input id="file" placeholder="Upload file" (change)="imageChange($event)" name="image" accept=".jpg,.jpeg,.png,.svg" type="file"
+      class="form-control">
+    <img [src]="image" class="img-preview" *ngIf="image">
   </div>
   <!-- <div class="form-group">
     <label for="teams">Número de equipos</label>
     <input type="number" min="2" [(ngModel)]="teamsNumber" (ngModelChange)="teamNumberChange()" class="form-control" name="teams">
   </div> -->
-  <div class="form-group">
+  <div class="my-4 mx-4 col-8">
+    <h5>Añadir equipo al torneo</h5>
     <div class="form-group">
       <label for="team-name">Nombre de equipo</label>
       <input type="text" class="form-control" [(ngModel)]="newTeam.name" name="team-name">
     </div>
     <div class="form-group">
       <label for="team-image">Imagen</label>
-      <input type="file">
+      <input id="file" placeholder="Upload file" (change)="teamImageChange($event)" name="team-image" accept=".jpg,.jpeg,.png,.svg"
+        type="file" class="form-control">
+      <img [src]="newTeam.image" [ngClass]="{'img-avatar': newTeam.image}" *ngIf="newTeam.image">
+      <p>
+        <button class="btn btn-primary my-2" (click)="addTeam()">Añadir equipo</button>
+      </p>
+
     </div>
-    <button class="btn btn-primary" (click)="addTeam()">Añadir equipo</button>
+    <div class="border">
+      <div class="row">
+        <div *ngFor="let team of teams; let i = index" class="col-6">
+          <p class="card-header">{{team.name}}</p>
+          <div class="card-body">
+            <img [src]="team.image" [ngClass]="{'img-avatar' : team.image }">
+            <button class="btn btn-danger" (click)="deleteTeam(i)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div *ngFor="let team of teams; let i = index">
-    <p>{{team.name}}</p>
-    <img [src]="team.image">
-  </div>
-  <div class="form-group">
-    <label for="image">Imagen</label>
-    <input id="file" placeholder="Upload file" (change)="imageChange($event)" name="image" accept=".jpg,.jpeg,.png,.svg" type="file"
-      class="form-control">
-  </div>
-  <img [src]="image" class="img-preview" *ngIf="image">
+
+
   <div class="alert alert-danger" *ngIf="errorMsg">
     <p>{{errorMsg}}</p>
   </div>
-  <input type="submit" [disabled]="createTournamentForm.invalid" value="Crear liga" class="btn btn-primary">
+  <button [disabled]="createTournamentForm.invalid" value="Crear liga" class="btn btn-primary" (click)="createTournament()">Crear torneo</button>
 </form>

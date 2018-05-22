@@ -3,6 +3,7 @@ import { IUser } from '../../../user/interfaces/i-user';
 import { AuthService } from '../../../services/auth.service';
 import { TournamentService } from '../services/tournament.service';
 import { Router } from '@angular/router';
+import { ITeam } from '../../team/interfaces/i-team';
 import { ITournament } from '../interfaces/i-tournament';
 
 @Component({
@@ -14,10 +15,12 @@ export class TournamentCreateComponent implements OnInit {
 
   user: IUser;
   name: string;
-  newTeam;
-  teams;
+  newTeam: ITeam;
+  teams = [];
   teamsNumber: number;
-  password: string;
+  image: string;
+  description: string;
+  isPublic = false;
   constructor(private authService: AuthService,
     private tournamentService: TournamentService, private router: Router) { }
 
@@ -25,12 +28,11 @@ export class TournamentCreateComponent implements OnInit {
     this.authService.getLoggedUser().subscribe(user => {
       this.user = user;
     });
-  }
 
-  teamNumberChange() {
-    console.log(this.teamsNumber);
-    // this.teams = new Array(this.teamsNumber);
-    // console.log(this.teams);
+    this.newTeam = {
+      name: '',
+      tournament_id: 0
+    };
   }
 
   createTournament() {
@@ -38,6 +40,10 @@ export class TournamentCreateComponent implements OnInit {
       name: this.name,
       teamsNumber: this.teamsNumber,
       adminId: +this.user.id,
+      description: this.description,
+      image: this.image,
+      teams: this.teams,
+      is_public: this.isPublic
     };
 
     console.log(tournament);
@@ -45,10 +51,44 @@ export class TournamentCreateComponent implements OnInit {
     this.tournamentService.createTournament(tournament).subscribe(
       ok => {
         if (ok) {
-          this.router.navigate(['/tournaments']);
+          this.router.navigate(['/private']);
         }
       }
     );
+  }
+
+  addTeam() {
+    this.teams.push(this.newTeam);
+    this.newTeam = {
+      name: '',
+      tournament_id: 0
+    };
+  }
+
+  deleteTeam(index) {
+    this.teams.splice(index, 1);
+  }
+
+  imageChange(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  teamImageChange(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.newTeam.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
 }
