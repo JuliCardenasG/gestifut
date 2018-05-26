@@ -1,0 +1,54 @@
+<section class="main">
+  <div class="row col-12">
+    <div class="col-12 col-sm-8">
+      <div class="row">
+        <h2>{{tournament.name}}</h2>
+      </div>
+      <div class="row">
+        <p>{{tournament.description}}</p>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6 mb-3" *ngFor="let team of tournament.teams">
+          <div class="card">
+            <div class="card-header">{{team.name}}</div>
+            <img *ngIf="team.image" [src]="IMG_SERVER + team.image" class="img-avatar">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row col-12">
+          <h3>Calendario</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Equipo local</th>
+                <th scope="col">Equipo visitante</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let match of matches">
+                <td>{{getTeamName(match.team_local_id)}}</td>
+                <td>{{getTeamName(match.team_visitor_id)}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-4 mt-4 mt-md-0 text-center">
+      <div class="row">
+        <div class="row col-12">
+          <img [src]="IMG_SERVER + tournament.image" class="img-avatar mx-auto">
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="row col-12">
+          <button class="btn btn-success mx-auto">Editar torneo</button>
+        </div>
+        <div class="row col-12 mt-2">
+          <button class="btn btn-danger mx-auto">Borrar torneo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

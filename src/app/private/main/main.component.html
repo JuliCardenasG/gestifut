@@ -18,7 +18,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{tournament.name}}</h5>
                 <p class="card-text">{{tournament.description}}</p>
-                <a class="btn btn-secondary">Ir al torneo</a>
+                <a class="btn btn-secondary" [routerLink]="['tournaments/', tournament.id]">Ir al torneo</a>
               </div>
             </div>
           </div>

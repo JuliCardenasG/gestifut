@@ -7,6 +7,10 @@ export interface IServerResponse {
     error?: string;
     user?: IUser;
     userId?: number;
+    tournamentId?: number;
+    calendarId?: number;
+    matchId?: number;
+    id?: string;
 }
 
 export interface ITournamentResponse extends IServerResponse {

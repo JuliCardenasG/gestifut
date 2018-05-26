@@ -21,6 +21,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.user = this.route.snapshot.data.user;
     this.tournaments = this.route.snapshot.data.tournaments;
+    console.log(this.user, this.tournaments);
   }
 
 }

@@ -6,6 +6,7 @@ import { TopMenuComponent } from './top-menu/top-menu.component';
 import { MainComponent } from './main/main.component';
 import { UserResolverService } from '../user/resolvers/user-resolver.service';
 import { TournamentsResolverService } from './tournament/resolvers/tournaments-resolver.service';
+import { TournamentResolverService } from './tournament/resolvers/tournament-resolver.service';
 
 @NgModule({
   imports: [
@@ -41,6 +42,9 @@ import { TournamentsResolverService } from './tournament/resolvers/tournaments-r
       ]
     )
   ],
-  declarations: [LayoutComponent, TopMenuComponent, MainComponent]
+  declarations: [LayoutComponent, TopMenuComponent, MainComponent],
+  providers: [
+    TournamentResolverService
+  ]
 })
 export class PrivateModule { }

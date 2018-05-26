@@ -38,7 +38,7 @@ export class TournamentCreateComponent implements OnInit {
   createTournament() {
     const tournament: ITournament = {
       name: this.name,
-      teamsNumber: this.teamsNumber,
+      teamsNumber: this.teams.length,
       adminId: +this.user.id,
       description: this.description,
       image: this.image,
@@ -49,9 +49,31 @@ export class TournamentCreateComponent implements OnInit {
     console.log(tournament);
 
     this.tournamentService.createTournament(tournament).subscribe(
-      ok => {
-        if (ok) {
-          this.router.navigate(['/private']);
+      tournamentResponse => {
+        const tournamentId = tournamentResponse.id;
+        const teamsIds = tournamentResponse.teamsIds;
+        for (let i = 0; i < this.teams.length; i++) {
+          this.teams[i].id = teamsIds[i];
+        }
+        console.log('Tournament id', tournamentId);
+        console.log(this.teams);
+        if (tournamentId) {
+          this.tournamentService.createCalendar(tournamentId).subscribe(
+            calendarId => {
+              console.log('Calendar id', calendarId);
+              const matchdayObject = {
+                calendarId: calendarId,
+                tournamentId: tournamentId,
+                teams: this.teams
+              };
+              this.tournamentService.createMatches(matchdayObject).subscribe(
+                ok => {
+                  console.log('ok: ', ok);
+                  this.router.navigate(['/private/tournaments/', tournamentId]);
+                }
+              );
+            }
+          );
         }
       }
     );
@@ -59,9 +81,12 @@ export class TournamentCreateComponent implements OnInit {
 
   addTeam() {
     this.teams.push(this.newTeam);
+    console.log(this.newTeam);
+    console.log(this.teams);
     this.newTeam = {
       name: '',
-      tournament_id: 0
+      tournament_id: 0,
+      image: ''
     };
   }
 
