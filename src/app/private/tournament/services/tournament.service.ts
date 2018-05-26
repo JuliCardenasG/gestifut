@@ -87,6 +87,10 @@ export class TournamentService {
       });
   }
 
+  getTournamentMatchesByMatchId() {
+    
+  }
+
   deleteTournament(tournamentId): Observable<boolean> {
     return this.http.delete(this.TOURNAMENT_URL + tournamentId)
       .map((resp: any) => {

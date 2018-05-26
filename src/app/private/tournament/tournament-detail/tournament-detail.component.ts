@@ -16,6 +16,9 @@ export class TournamentDetailComponent implements OnInit {
   tournament: ITournament;
   teams: ITeam[];
   matches: IMatch[];
+  showMatches: IMatch[];
+  matchdays;
+  currentMatchdayId;
   readonly IMG_SERVER = SERVER_URL;
   constructor(private route: ActivatedRoute, private tournamentService: TournamentService,
     private router: Router) { }
@@ -23,14 +26,12 @@ export class TournamentDetailComponent implements OnInit {
   ngOnInit() {
     this.tournament = this.route.snapshot.data.tournament;
     console.log(this.tournament);
-    this.tournamentService.getTournamentMatches(this.tournament.id).subscribe(matches => {
-      this.matches = matches;
-      console.log(matches);
-    });
+    this.matches = this.tournament.matches;
+    this.currentMatchdayId = this.tournament.matchdays[0].id;
+    this.setCurrentMatchday();
   }
 
   getTeamName(teamId) {
-    console.log(this.tournament.teams);
     // tslint:disable-next-line:triple-equals
     return this.tournament.teams.find(team => team.id == teamId).name;
   }
@@ -39,6 +40,16 @@ export class TournamentDetailComponent implements OnInit {
     this.tournamentService.deleteTournament(this.tournament.id).subscribe(
       ok => this.router.navigate(['/private'])
     );
+  }
+
+  setCurrentMatchday() {
+    console.log(this.currentMatchdayId);
+    this.showMatches = this.matches.filter(match => {
+      console.log(match);
+      console.log(this.currentMatchdayId);
+      return match.matchday_id == this.currentMatchdayId;
+    });
+    console.log(this.showMatches);
   }
 
 }

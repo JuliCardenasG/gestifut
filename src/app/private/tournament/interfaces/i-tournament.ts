@@ -9,4 +9,6 @@ export interface ITournament {
     description: string;
     is_public?: boolean;
     teams?: ITeam[];
+    matches?: any;
+    matchdays?: any;
 }
