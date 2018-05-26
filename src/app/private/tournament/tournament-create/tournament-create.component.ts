@@ -51,7 +51,7 @@ export class TournamentCreateComponent implements OnInit {
     this.tournamentService.createTournament(tournament).subscribe(
       tournamentResponse => {
         const tournamentId = tournamentResponse.id;
-        const teamsIds = tournamentResponse.teamsIds;
+        const teamsIds = tournamentResponse.teamsIds.sort((a, b) => a > b);
         for (let i = 0; i < this.teams.length; i++) {
           this.teams[i].id = teamsIds[i];
         }
@@ -86,7 +86,6 @@ export class TournamentCreateComponent implements OnInit {
     this.newTeam = {
       name: '',
       tournament_id: 0,
-      image: ''
     };
   }
 

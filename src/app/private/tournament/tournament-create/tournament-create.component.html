@@ -45,7 +45,7 @@
         <div *ngFor="let team of teams; let i = index" class="col-6">
           <p class="card-header">{{team.name}}</p>
           <div class="card-body">
-            <img [src]="team.image" [ngClass]="{'img-avatar' : team.image }">
+            <img *ngIf="team.image" [src]="team.image" [ngClass]="{'img-avatar' : team.image }">
             <button class="btn btn-danger" (click)="deleteTeam(i)">Eliminar</button>
           </div>
         </div>

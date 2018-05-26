@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ITournament } from '../interfaces/i-tournament';
 import { SERVER_URL } from '../../../app.constants';
 import { ITeam } from '../../team/interfaces/i-team';
@@ -17,10 +17,12 @@ export class TournamentDetailComponent implements OnInit {
   teams: ITeam[];
   matches: IMatch[];
   readonly IMG_SERVER = SERVER_URL;
-  constructor(private route: ActivatedRoute, private tournamentService: TournamentService) { }
+  constructor(private route: ActivatedRoute, private tournamentService: TournamentService,
+    private router: Router) { }
 
   ngOnInit() {
     this.tournament = this.route.snapshot.data.tournament;
+    console.log(this.tournament);
     this.tournamentService.getTournamentMatches(this.tournament.id).subscribe(matches => {
       this.matches = matches;
       console.log(matches);
@@ -31,6 +33,12 @@ export class TournamentDetailComponent implements OnInit {
     console.log(this.tournament.teams);
     // tslint:disable-next-line:triple-equals
     return this.tournament.teams.find(team => team.id == teamId).name;
+  }
+
+  deleteTournament() {
+    this.tournamentService.deleteTournament(this.tournament.id).subscribe(
+      ok => this.router.navigate(['/private'])
+    );
   }
 
 }

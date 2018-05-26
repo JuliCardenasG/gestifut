@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="row col-12">
+    <h3>Mis torneos</h3>
+  </div>
+  <div class="d-flex flex-row flex-wrap col-12 my-4" *ngIf="tournaments && tournaments.length > 0">
+    <div *ngFor="let tournament of tournaments" class="col-12 col-sm-6">
+      <div class="card text-center">
+        <img [src]="IMG_SERVER + tournament.image" class="tournament-img mx-auto">
+        <div class="card-body">
+          <h5 class="card-title">{{tournament.name}}</h5>
+          <p class="card-text">{{tournament.description}}</p>
+          <a class="btn btn-secondary" [routerLink]="['/private/tournaments/', tournament.id]">Ir al torneo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-wrap col-12" *ngIf="!tournaments || tournaments.length == 0">
+    <div class="bg-alert">
+      <p>No se han encontrado torneos</p>
+    </div>
+  </div>
+  <div>
+    <a [routerLink]="['/private/tournaments/create']" class="btn btn-primary">Crear torneo</a>
+  </div>
+</div>

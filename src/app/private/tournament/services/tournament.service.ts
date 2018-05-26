@@ -20,7 +20,6 @@ export class TournamentService {
 
   getTournament(id): Observable<ITournament> {
     console.log(id);
-    console.log(this.TOURNAMENT_URL + id);
     return this.http.get(this.TOURNAMENT_URL + id)
       .map((response: ITournamentResponse) => {
         console.log(response.tournament);
@@ -85,6 +84,13 @@ export class TournamentService {
         if (resp.ok) {
           return resp.matches;
         }
+      });
+  }
+
+  deleteTournament(tournamentId): Observable<boolean> {
+    return this.http.delete(this.TOURNAMENT_URL + tournamentId)
+      .map((resp: any) => {
+        return resp.ok;
       });
   }
 }

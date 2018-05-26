@@ -5,6 +5,7 @@ import { TournamentCreateComponent } from './tournament-create/tournament-create
 import { FormsModule } from '@angular/forms';
 import { TournamentDetailComponent } from './tournament-detail/tournament-detail.component';
 import { TournamentResolverService } from './resolvers/tournament-resolver.service';
+import { TournamentListComponent } from './tournament-list/tournament-list.component';
 
 const routes: Route[] = [
   {
@@ -17,6 +18,10 @@ const routes: Route[] = [
     resolve: {
       tournament: TournamentResolverService
     }
+  },
+  {
+    path: '',
+    component: TournamentListComponent
   }
 ];
 
@@ -26,7 +31,7 @@ const routes: Route[] = [
     FormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TournamentCreateComponent, TournamentDetailComponent],
+  declarations: [TournamentCreateComponent, TournamentDetailComponent, TournamentListComponent],
   providers: []
 })
 export class TournamentModule { }
