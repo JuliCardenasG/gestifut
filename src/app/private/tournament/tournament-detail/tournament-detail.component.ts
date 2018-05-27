@@ -29,7 +29,19 @@ export class TournamentDetailComponent implements OnInit {
     this.matches = this.tournament.matches;
     this.currentMatchdayId = this.tournament.matchdays[0].id;
     this.tournamentService.getTournamentClasification(this.tournament.id).subscribe(
-      clasifications => this.clasifications = clasifications
+      clasifications => {
+        this.clasifications = clasifications.sort((a, b) => {
+
+          // tslint:disable-next-line:triple-equals
+          if (a.points == b.points && (a.goals_scored >= a.goals_against && b.goals_scored >= b.goals_against)) {
+            return a.goals_scored < b.goals_scored;
+          }
+          // tslint:disable-next-line:one-line
+          else {
+            return a.points < b.points;
+          }
+        });
+      }
     );
     this.setCurrentMatchday();
   }

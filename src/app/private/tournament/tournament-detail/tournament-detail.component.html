@@ -7,22 +7,31 @@
       <div class="row">
         <p>{{tournament.description}}</p>
       </div>
-      <div class="row">
-        <div class="col-12 col-sm-6 mb-3" *ngFor="let team of tournament.teams">
-          <div class="card">
-            <div class="card-header">{{team.name}}</div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-6">
-                  <img *ngIf="team.image" [src]="IMG_SERVER + team.image" class="img-avatar">
-                </div>
-                <div class="col-6">
-                  <a class="btn btn-secondary mb-2" [routerLink]="['/private/teams', team.id]">Editar </a>
-                  <button class="btn btn-danger" (click)="deleteTeam(team.id)">Eliminar</button>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="row" *ngIf="clasifications">
+        <div class="row col-12 mb-4">
+          <h3>Clasificación</h3>
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th scope="col">Pos.</th>
+                <th>Equipo</th>
+                <th>Goles a favor</th>
+                <th scope="col">Goles en contra</th>
+                <th>Dif. goles</th>
+                <th>Puntos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let clasification of clasifications; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{getTeamName(clasification.team_id)}}</td>
+                <td>{{clasification.goals_scored}}</td>
+                <td>{{clasification.goals_against}}</td>
+                <td>{{clasification.goals_scored - clasification.goals_against}}</td>
+                <td>{{clasification.points}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div class="row">
@@ -54,29 +63,23 @@
           </table>
         </div>
       </div>
-      <div class="row" *ngIf="clasifications">
-        <div class="row col-12 mb-4">
-          <h3>Clasificación</h3>
-          <table class="table table-hover text-center">
-            <thead>
-              <tr>
-                <th scope="col">Pos.</th>
-                <th>Equipo</th>
-                <th>Goles a favor</th>
-                <th scope="col">Goles en contra</th>
-                <th>Puntos</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let clasification of clasifications; let i = index">
-                <td>{{i + 1}}</td>
-                <td>{{getTeamName(clasification.team_id)}}</td>
-                <td>{{clasification.goals_scored}}</td>
-                <td>{{clasification.goals_against}}</td>
-                <td>{{clasification.points}}</td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="row mb-4">
+        <h3 class="col-12">Equipos</h3>
+        <div class="col-12 col-sm-6 mb-3" *ngFor="let team of tournament.teams">
+          <div class="card">
+            <div class="card-header">{{team.name}}</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6">
+                  <img *ngIf="team.image" [src]="IMG_SERVER + team.image" class="img-avatar">
+                </div>
+                <div class="col-6">
+                  <a class="btn btn-secondary mb-2" [routerLink]="['/private/teams', team.id]">Editar </a>
+                  <button class="btn btn-danger" (click)="deleteTeam(team.id)">Eliminar</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

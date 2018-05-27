@@ -19,6 +19,7 @@ export class MatchDetailComponent implements OnInit {
 
   ngOnInit() {
     this.match = this.route.snapshot.data.match;
+    console.log(this.match);
     this.tournamentService.getTournamentTeams(this.match.tournament_id).subscribe(
       teams => this.teams = teams
     );
