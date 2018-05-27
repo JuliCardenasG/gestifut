@@ -33,21 +33,17 @@ export class RegisterComponent implements OnInit {
     };
     this.authService.register(this.newUser).subscribe(
       ok => {
-        console.log(ok);
         if (ok) {
           this.router.navigate(['/auth/registered']);
         }
       },
       error => {
-        console.log(error);
         this.errorMsg = error;
-        console.log(this.errorMsg);
       }
     );
   }
 
   imageChange(event) {
-    console.log(event);
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();

@@ -15,14 +15,13 @@ export class TournamentService {
   readonly TEAM_URL = SERVER_URL + 'teams/';
   readonly CALENDAR_URL = SERVER_URL + 'calendars/';
   readonly MATCH_URL = SERVER_URL + 'matches/';
+  readonly CLASIFICATION_URL = SERVER_URL + 'clasifications/';
 
   constructor(private http: HttpClient) { }
 
   getTournament(id): Observable<ITournament> {
-    console.log(id);
     return this.http.get(this.TOURNAMENT_URL + id)
       .map((response: ITournamentResponse) => {
-        console.log(response.tournament);
         return response.tournament;
       })
       .catch(err => Observable.throw(err));
@@ -31,7 +30,6 @@ export class TournamentService {
   createTournament(tournament): Observable<any> {
     return this.http.post(this.TOURNAMENT_URL, tournament)
       .map((response: IServerResponse) => {
-        console.log(response);
         if (response.ok) {
           return response;
         }
@@ -87,8 +85,13 @@ export class TournamentService {
       });
   }
 
-  getTournamentMatchesByMatchId() {
-    
+  getTournamentClasification(tournamentId): Observable<any> {
+    return this.http.get(this.CLASIFICATION_URL + 'tournament/' + tournamentId)
+      .map((resp: any) => {
+        if (resp.ok) {
+          return resp.clasifications;
+        }
+      });
   }
 
   deleteTournament(tournamentId): Observable<boolean> {

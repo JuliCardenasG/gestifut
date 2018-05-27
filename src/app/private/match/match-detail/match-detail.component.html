@@ -1,0 +1,28 @@
+<section class="main">
+  <div class="row col-12">
+    <div class="col-12 col-sm-8">
+      <div class="row">
+        <h2 class="col-8">Partido</h2>
+        <p class="col-4">
+          <a [routerLink]="['/private/tournaments', match.tournament_id]" class="btn btn-secondary">Volver al torneo</a>
+        </p>
+      </div>
+      <div class="row bg-light p-4 text-center" *ngIf="teams">
+        <div class="col-4">
+          <p>{{getTeamName(match.team_local_id)}}</p>
+        </div>
+        <div class="col-2">
+          <!-- <p>{{match.team_local_goals}}</p> -->
+          <input type="number" name="local_goals" [(ngModel)]="match.team_local_goals" class="form-control">
+        </div>
+        <div class="col-2">
+          <!-- <p>{{match.team_visitor_goals}}</p> -->
+          <input type="number" name="visitor_goals" [(ngModel)]="match.team_visitor_goals" class="form-control">
+        </div>
+        <div class="col-4">
+          <p>{{getTeamName(match.team_visitor_id)}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

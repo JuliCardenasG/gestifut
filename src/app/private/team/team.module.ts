@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Route } from '@angular/router';
+import { TeamDetailComponent } from './team-detail/team-detail.component';
+import { TeamResolverService } from './resolvers/team-resolver.service';
 
 const routes: Route[] = [
   {
-    path: '',
+    path: ':id',
+    component: TeamDetailComponent,
+    resolve: {
+      team: TeamResolverService
+    }
   }
 ];
 
@@ -13,6 +19,6 @@ const routes: Route[] = [
     CommonModule,
     RouterModule.forChild(routes)
   ],
-  declarations: []
+  declarations: [TeamDetailComponent]
 })
 export class TeamModule { }

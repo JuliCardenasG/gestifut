@@ -8,6 +8,7 @@ import { UserResolverService } from '../user/resolvers/user-resolver.service';
 import { TournamentsResolverService } from './tournament/resolvers/tournaments-resolver.service';
 import { TournamentResolverService } from './tournament/resolvers/tournament-resolver.service';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -36,6 +37,10 @@ import { TournamentResolverService } from './tournament/resolvers/tournament-res
             {
               path: 'players',
               loadChildren: './player/player.module#PlayerModule'
+            },
+            {
+              path: 'matches',
+              loadChildren: './match/match.module#MatchModule'
             }
           ]
         }

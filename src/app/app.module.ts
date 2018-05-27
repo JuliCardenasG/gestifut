@@ -12,6 +12,8 @@ import { TournamentService } from './private/tournament/services/tournament.serv
 import { TournamentsResolverService } from './private/tournament/resolvers/tournaments-resolver.service';
 import { LoginActivateGuard } from './guards/login-activate.guard';
 import { LogoutActivateGuard } from './guards/logout-activate.guard';
+import { TeamResolverService } from './private/team/resolvers/team-resolver.service';
+import { TeamService } from './private/team/services/team.service';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { LogoutActivateGuard } from './guards/logout-activate.guard';
     TournamentsResolverService,
     LoginActivateGuard,
     LogoutActivateGuard,
+    TeamService,
+    TeamResolverService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

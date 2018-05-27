@@ -25,7 +25,6 @@ export class TournamentDetailComponent implements OnInit {
 
   ngOnInit() {
     this.tournament = this.route.snapshot.data.tournament;
-    console.log(this.tournament);
     this.matches = this.tournament.matches;
     this.currentMatchdayId = this.tournament.matchdays[0].id;
     this.setCurrentMatchday();
@@ -43,13 +42,18 @@ export class TournamentDetailComponent implements OnInit {
   }
 
   setCurrentMatchday() {
-    console.log(this.currentMatchdayId);
     this.showMatches = this.matches.filter(match => {
-      console.log(match);
-      console.log(this.currentMatchdayId);
+      // tslint:disable-next-line:triple-equals
       return match.matchday_id == this.currentMatchdayId;
     });
-    console.log(this.showMatches);
+  }
+
+  goToMatch(matchId) {
+    this.router.navigate(['/private/matches', matchId]);
+  }
+
+  deleteTeam(teamId) {
+
   }
 
 }

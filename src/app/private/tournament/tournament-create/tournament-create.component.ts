@@ -46,8 +46,6 @@ export class TournamentCreateComponent implements OnInit {
       is_public: this.isPublic
     };
 
-    console.log(tournament);
-
     this.tournamentService.createTournament(tournament).subscribe(
       tournamentResponse => {
         const tournamentId = tournamentResponse.id;
@@ -55,12 +53,9 @@ export class TournamentCreateComponent implements OnInit {
         for (let i = 0; i < this.teams.length; i++) {
           this.teams[i].id = teamsIds[i];
         }
-        console.log('Tournament id', tournamentId);
-        console.log(this.teams);
         if (tournamentId) {
           this.tournamentService.createCalendar(tournamentId).subscribe(
             calendarId => {
-              console.log('Calendar id', calendarId);
               const matchdayObject = {
                 calendarId: calendarId,
                 tournamentId: tournamentId,
@@ -68,7 +63,6 @@ export class TournamentCreateComponent implements OnInit {
               };
               this.tournamentService.createMatches(matchdayObject).subscribe(
                 ok => {
-                  console.log('ok: ', ok);
                   this.router.navigate(['/private/tournaments/', tournamentId]);
                 }
               );
@@ -81,8 +75,6 @@ export class TournamentCreateComponent implements OnInit {
 
   addTeam() {
     this.teams.push(this.newTeam);
-    console.log(this.newTeam);
-    console.log(this.teams);
     this.newTeam = {
       name: '',
       tournament_id: 0,

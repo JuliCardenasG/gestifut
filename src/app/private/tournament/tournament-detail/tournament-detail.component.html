@@ -11,12 +11,22 @@
         <div class="col-12 col-sm-6 mb-3" *ngFor="let team of tournament.teams">
           <div class="card">
             <div class="card-header">{{team.name}}</div>
-            <img *ngIf="team.image" [src]="IMG_SERVER + team.image" class="img-avatar">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6">
+                  <img *ngIf="team.image" [src]="IMG_SERVER + team.image" class="img-avatar">
+                </div>
+                <div class="col-6">
+                  <a class="btn btn-secondary mb-2" [routerLink]="['/private/teams', team.id]">Editar </a>
+                  <button class="btn btn-danger" (click)="deleteTeam(team.id)">Eliminar</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="row col-12">
+        <div class="row col-12 mb-4">
           <h3>Calendario</h3>
           <div class="row col-12 my-2">
             <select name="matchdays" [(ngModel)]="currentMatchdayId" class="form-control" (change)="setCurrentMatchday()">
@@ -24,16 +34,20 @@
           </select>
           </div>
           
-          <table class="table text-center">
+          <table class="table table-hover text-center">
             <thead>
               <tr>
                 <th scope="col">Equipo local</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
                 <th scope="col">Equipo visitante</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let match of showMatches">
+              <tr *ngFor="let match of showMatches" (click)="goToMatch(match.id)">
                 <td>{{getTeamName(match.team_local_id)}}</td>
+                <td>{{match.team_local_goals}}</td>
+                <td>{{match.team_visitor_goals}}</td>
                 <td>{{getTeamName(match.team_visitor_id)}}</td>
               </tr>
             </tbody>

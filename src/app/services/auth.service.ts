@@ -56,7 +56,6 @@ export class AuthService {
       .map((response: IServerResponse) => {
         if (response.ok) {
           localStorage.setItem('token', response.token);
-          console.log(response.token);
           this.getLoggedUser().subscribe();
           return response.ok;
         }
