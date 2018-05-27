@@ -19,6 +19,7 @@ export class TournamentDetailComponent implements OnInit {
   showMatches: IMatch[];
   matchdays;
   currentMatchdayId;
+  clasifications;
   readonly IMG_SERVER = SERVER_URL;
   constructor(private route: ActivatedRoute, private tournamentService: TournamentService,
     private router: Router) { }
@@ -27,6 +28,9 @@ export class TournamentDetailComponent implements OnInit {
     this.tournament = this.route.snapshot.data.tournament;
     this.matches = this.tournament.matches;
     this.currentMatchdayId = this.tournament.matchdays[0].id;
+    this.tournamentService.getTournamentClasification(this.tournament.id).subscribe(
+      clasifications => this.clasifications = clasifications
+    );
     this.setCurrentMatchday();
   }
 
@@ -55,5 +59,4 @@ export class TournamentDetailComponent implements OnInit {
   deleteTeam(teamId) {
 
   }
-
 }

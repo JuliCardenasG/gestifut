@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class TeamService {
   readonly TEAM_URL = SERVER_URL + 'teams/';
+  readonly PLAYER_URL = SERVER_URL + 'players/';
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +17,13 @@ export class TeamService {
         if (response.ok) {
           return response.team;
         }
+      });
+  }
+
+  addPlayerToTeam(player): Observable<boolean> {
+    return this.http.post(this.TEAM_URL + 'players', player)
+      .map((resp: any) => {
+        return resp.ok;
       });
   }
 }

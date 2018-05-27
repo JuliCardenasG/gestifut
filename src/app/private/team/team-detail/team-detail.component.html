@@ -24,6 +24,23 @@
             </tr>
           </tbody>
         </table>
+        <button class="btn btn-info" (click)="showAddPlayerForm()">Añadir jugador</button>
+      </div>
+      <div class="row mt-4" *ngIf="showAddPlayer">
+        <legend>Añadir jugador</legend>
+        <form>
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" class="form-control" name="name" [(ngModel)]="newPlayer.name">
+          </div>
+          <div class="form-group">
+            <label for="number">Dorsal</label>
+            <input type="text" class="form-control" name="number" [(ngModel)]="newPlayer.number">
+          </div>
+          <div class="form-group">
+            <button (click)="addPlayer()" class="btn btn-success">Guardar</button>
+          </div>
+        </form>
       </div>
     </div>
     <div class="col-12 col-sm-4 mt-4 mt-md-0 text-center">

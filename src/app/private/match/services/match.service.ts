@@ -19,4 +19,11 @@ export class MatchService {
       });
   }
 
+  setMatchResult(matchResultJson): Observable<boolean> {
+    return this.http.post(this.MATCH_URL + 'result', matchResultJson)
+      .map((resp: any) => {
+        return resp.ok;
+      });
+  }
+
 }

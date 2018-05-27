@@ -30,10 +30,10 @@
           <h3>Calendario</h3>
           <div class="row col-12 my-2">
             <select name="matchdays" [(ngModel)]="currentMatchdayId" class="form-control" (change)="setCurrentMatchday()">
-            <option *ngFor="let matchday of tournament.matchdays" [ngValue]="matchday.id">Jornada {{matchday.matchday_number}}</option>
-          </select>
+              <option *ngFor="let matchday of tournament.matchdays" [ngValue]="matchday.id">Jornada {{matchday.matchday_number}}</option>
+            </select>
           </div>
-          
+
           <table class="table table-hover text-center">
             <thead>
               <tr>
@@ -54,6 +54,31 @@
           </table>
         </div>
       </div>
+      <div class="row" *ngIf="clasifications">
+        <div class="row col-12 mb-4">
+          <h3>Clasificación</h3>
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th scope="col">Pos.</th>
+                <th>Equipo</th>
+                <th>Goles a favor</th>
+                <th scope="col">Goles en contra</th>
+                <th>Puntos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let clasification of clasifications; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{getTeamName(clasification.team_id)}}</td>
+                <td>{{clasification.goals_scored}}</td>
+                <td>{{clasification.goals_against}}</td>
+                <td>{{clasification.points}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <div class="col-12 col-sm-4 mt-4 mt-md-0 text-center">
       <div class="row">
@@ -66,7 +91,7 @@
           <button class="btn btn-success mx-auto">Editar torneo</button>
         </div>
         <div class="row col-12 mt-2">
-          <button class="btn btn-danger mx-auto">Borrar torneo</button>
+          <button class="btn btn-danger mx-auto" (click)="deleteTournament()">Borrar torneo</button>
         </div>
       </div>
     </div>

@@ -3,4 +3,5 @@ export interface ITeam {
     name: string;
     tournament_id?: number;
     image?: string;
+    players?: any;
 }
