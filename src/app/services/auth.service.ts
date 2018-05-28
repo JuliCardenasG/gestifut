@@ -1,5 +1,5 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -26,7 +26,7 @@ export class AuthService {
         }
         return false;
       })
-      .catch(resp => Observable.throw('Error con el login'))
+      .catch(resp => Observable.throw('Error con el login'));
   }
 
   getLoggedUser(): Observable<IUser> {
@@ -68,6 +68,21 @@ export class AuthService {
           return Observable.throw('Email duplicado. Prueba a iniciar sesión');
         }
         return Observable.throw('Error al hacer login. Inténtalo de nuevo más tarde');
+      });
+  }
+
+  googleAccess(token: string): Observable<boolean> {
+    localStorage.setItem('token', token);
+    console.log(token);
+    return this.http.get(SERVER_URL + 'auth/google')
+      .catch((resp: HttpErrorResponse) => Observable.throw('Error entering with Google'))
+      .map((resp: any) => {
+        if (resp.ok) {
+          localStorage.setItem('token', resp.token);
+          return true;
+        } else {
+          throw resp.errorMessage;
+        }
       });
   }
 

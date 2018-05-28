@@ -27,5 +27,7 @@
 
     </div>
     <input type="submit" [disabled]="registerForm.invalid" value="Registrarse" class="btn btn-primary">
+    <button appGoogleLogin type="button" class="btn btn-danger" (loginOk)="loggedGoogle($event)" (loginError)="showError($event)">
+      <i class="fa fa-google" aria-hidden="true"></i> Acceder con Google</button>
   </form>
 </div>
