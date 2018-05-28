@@ -21,6 +21,7 @@ export class TournamentCreateComponent implements OnInit {
   image: string;
   description: string;
   isPublic = false;
+  errorMsg;
   constructor(private authService: AuthService,
     private tournamentService: TournamentService, private router: Router) { }
 
