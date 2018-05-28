@@ -24,6 +24,8 @@
     "@fortawesome/fontawesome": "^1.1.5",
     "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
     "@ng-bootstrap/ng-bootstrap": "^1.1.2",
+    "@types/gapi": "0.0.35",
+    "@types/gapi.auth2": "0.0.47",
     "bootstrap": "^4.1.0",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",

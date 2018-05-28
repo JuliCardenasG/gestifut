@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { UserModule } from '../user/user.module';
 import { LogoutActivateGuard } from '../guards/logout-activate.guard';
+import { GoogleLoginDirective } from '../google-login/directives/google-login.directive';
+import { GoogleLoginModule } from '../google-login/google-login.module';
 
 const routes: Route[] = [
   {
@@ -36,6 +38,7 @@ const routes: Route[] = [
   imports: [
     CommonModule,
     FormsModule,
+    GoogleLoginModule,
     RouterModule.forChild(routes),
     UserModule
   ],

@@ -30,6 +30,15 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  loggedGoogle (user: gapi.auth2.GoogleUser) {
+    const token = user.getAuthResponse(true).access_token;
+    this.authService.googleAccess(token)
+      .subscribe(
+        ok => {
+          this.router.navigate(['/private']);
+        });
+  }
+
   goToRegister() {
     this.router.navigate(['/register']);
   }
