@@ -14,6 +14,7 @@ import { LoginActivateGuard } from './guards/login-activate.guard';
 import { LogoutActivateGuard } from './guards/logout-activate.guard';
 import { TeamResolverService } from './private/team/resolvers/team-resolver.service';
 import { TeamService } from './private/team/services/team.service';
+import { GoogleLoginModule } from './google-login/google-login.module';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { TeamService } from './private/team/services/team.service';
   imports: [
     BrowserModule,
     HttpClientModule,
+    GoogleLoginModule.forRoot('185094683124-f6ro8sdi456p08mo8b0p0cudkc64ah26.apps.googleusercontent.com'),
     RouterModule.forRoot(APP_ROUTES, {
       preloadingStrategy: PreloadAllModules
     })

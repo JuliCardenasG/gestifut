@@ -16,6 +16,8 @@
       </div>
       <input type="submit" class="btn btn-primary" [disabled]="!loginForm.valid" value="Login">
       <button class="btn btn-secondary" (click)="goToRegister()">Registrarse</button>
+      <button appGoogleLogin type="button" class="btn btn-danger" (loginOk)="loggedGoogle($event)" (loginError)="showError($event)">
+        <i class="fa fa-google" aria-hidden="true"></i> Acceder con Google</button>
     </form>
   </div>
 </div>
