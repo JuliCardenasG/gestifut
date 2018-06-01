@@ -14,6 +14,8 @@ export class MatchDetailComponent implements OnInit {
 
   match: IMatch;
   teams: ITeam[];
+  localTeam: ITeam;
+  visitorTeam: ITeam;
   constructor(private route: ActivatedRoute, private tournamentService: TournamentService,
     private matchService: MatchService, private router: Router) { }
 
@@ -21,7 +23,14 @@ export class MatchDetailComponent implements OnInit {
     this.match = this.route.snapshot.data.match;
     console.log(this.match);
     this.tournamentService.getTournamentTeams(this.match.tournament_id).subscribe(
-      teams => this.teams = teams
+      teams => {
+        this.teams = teams;
+        // tslint:disable-next-line:triple-equals
+        this.localTeam = this.teams.find(team => team.id == this.match.team_local_id);
+        // tslint:disable-next-line:triple-equals
+        this.visitorTeam = this.teams.find(team => team.id == this.match.team_visitor_id);
+        console.log(this.teams);
+      }
     );
   }
 

@@ -11,7 +11,8 @@
         <div class="col-6">
           <div class="row">
             <div class="col-8">
-              <p>{{getTeamName(match.team_local_id)}}</p>
+              <!-- <p>{{getTeamName(match.team_local_id)}}</p> -->
+              <p>{{localTeam.name}}</p>
             </div>
             <div class="col-4">
               <!-- <p>{{match.team_local_goals}}</p> -->
@@ -19,35 +20,64 @@
               <!-- <p *ngFor="let localGoalscorer of localGoalscorers">{{localGoalscorer.name}}</p> -->
             </div>
           </div>
-          <!-- <div class="row">
+          <div class="row mt-4">
             <div class="row col-12">
-              <h5 class="col-12">Añadir goleadores</h5>
+              <h5 class="col-12 mx-auto">Goleadores equipo local</h5>
             </div>
             <div class="row col-12">
               <div class="col-12 form-group">
                 <div class="row">
-                  <label for="local-scorer">Nombre</label>
-                  <label for="local-goals">Número de goles</label>
+                  <div class="col-8">
+                    <label for="local-scorer">Nombre</label>
+                  </div>
+                  <div class="col-4">
+                    <label for="local-goals">Número de goles</label>
+                  </div>
                 </div>
-                <div class="row">
-                  <select name="local-scorer" [(ngModel)]="newLocalScorer.id">
-                    <option *ngFor="let player of localPlayers" [ngValue]="player.id">{{player.name}}</option>
-                  </select>
-                  <input type="number" name="local-goals" [(ngModel)]="newLocalScorer.goals">
+                <div class="row mt-2" *ngFor="let player of localTeam.players; let i = index">
+                  <div class="col-8">
+                    <label>{{player.name}}</label>
+                  </div>
+                  <div class="col-4">
+                    <input type="number" name="local-goals-{{i}}" class="form-control" min="0" [(ngModel)]="player.goals">
+                  </div>
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
         </div>
         <div class="col-6">
           <div class="row">
             <div class="col-4">
-              <!-- <p>{{match.team_visitor_goals}}</p> -->
               <input type="number" name="visitor_goals" [(ngModel)]="match.team_visitor_goals" class="form-control">
-              <!-- <p *ngFor="let visitorGoalscorer of visitorGoalscorers">{{visitorGoalscorer.name}}</p> -->
             </div>
             <div class="col-8">
-              <p>{{getTeamName(match.team_visitor_id)}}</p>
+              <p>{{visitorTeam.name}}</p>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="row col-12">
+              <h5 class="col-12 mx-auto">Goleadores equipo visitante</h5>
+            </div>
+            <div class="row col-12">
+              <div class="col-12 form-group">
+                <div class="row">
+                  <div class="col-4">
+                    <label for="visitor-goals">Número de goles</label>
+                  </div>
+                  <div class="col-8">
+                    <label for="visitor-scorer">Nombre</label>
+                  </div>
+                </div>
+                <div class="row mt-2" *ngFor="let player of visitorTeam.players; let i = index">
+                  <div class="col-4">
+                    <input type="number" name="visitor-goals-{{i}}" class="form-control" min="0" [(ngModel)]="player.goals">
+                  </div>
+                  <div class="col-8">
+                    <label>{{player.name}}</label>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
