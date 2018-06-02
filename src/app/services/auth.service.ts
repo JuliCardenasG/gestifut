@@ -86,6 +86,13 @@ export class AuthService {
       });
   }
 
+  editProfile (user: IUser): Observable<boolean> {
+    return this.http.put(SERVER_URL + 'auth/edit/' + user.id, user)
+      .map((resp: any) => {
+        return resp.ok;
+      });
+  }
+
   logout() {
     localStorage.removeItem('token');
     this.loggedUser = null;

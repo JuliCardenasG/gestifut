@@ -1,6 +1,7 @@
 <div class="container container-fluid">
   <form id="form-register" class="mt-4" role="form" (ngSubmit)="register()" #registerForm="ngForm">
-    <legend>Registrarse en GestiSport</legend>
+    <legend *ngIf="!userToEdit">Registrarse en GestiSport</legend>
+    <legend *ngIf="userToEdit">Modificar perfil</legend>
 
     <div class="form-group">
       <label for="nombre">Nombre:</label>
@@ -22,12 +23,14 @@
         class="form-control">
     </div>
     <img [src]="image" class="img-preview" *ngIf="image">
+    <img [src]="IMG_URL + imageToEdit" class="img-preview" *ngIf="userToEdit && !image">
     <div class="alert alert-danger" *ngIf="errorMsg">
       <p>{{errorMsg}}</p>
 
     </div>
-    <input type="submit" [disabled]="registerForm.invalid" value="Registrarse" class="btn btn-primary">
-    <button appGoogleLogin type="button" class="btn btn-danger" (loginOk)="loggedGoogle($event)" (loginError)="showError($event)">
+    <input type="submit" [disabled]="registerForm.invalid" value="Registrarse" class="btn btn-primary" *ngIf="!userToEdit">
+    <input type="submit" value="Editar perfil" class="btn btn-primary" *ngIf="userToEdit">
+    <button appGoogleLogin type="button" class="btn btn-danger" (loginOk)="loggedGoogle($event)" (loginError)="showError($event)" *ngIf="!userToEdit">
       <i class="fa fa-google" aria-hidden="true"></i> Acceder con Google</button>
   </form>
 </div>

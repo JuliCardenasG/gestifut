@@ -5,11 +5,12 @@ import { LayoutComponent } from './layout/layout.component';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
-import { RegisterComponent } from './register/register.component';
 import { UserModule } from '../user/user.module';
 import { LogoutActivateGuard } from '../guards/logout-activate.guard';
 import { GoogleLoginDirective } from '../google-login/directives/google-login.directive';
 import { GoogleLoginModule } from '../google-login/google-login.module';
+import { SharedModule } from '../shared/shared.module';
+import { RegisterComponent } from '../shared/register/register.component';
 
 const routes: Route[] = [
   {
@@ -38,6 +39,7 @@ const routes: Route[] = [
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
     GoogleLoginModule,
     RouterModule.forChild(routes),
     UserModule
@@ -45,8 +47,7 @@ const routes: Route[] = [
   declarations: [
     LayoutComponent,
     LoginComponent,
-    MainComponent,
-    RegisterComponent
+    MainComponent
   ]
 })
 export class PublicModule { }

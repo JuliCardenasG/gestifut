@@ -7,11 +7,15 @@ import { MainComponent } from './main/main.component';
 import { UserResolverService } from '../user/resolvers/user-resolver.service';
 import { TournamentsResolverService } from './tournament/resolvers/tournaments-resolver.service';
 import { TournamentResolverService } from './tournament/resolvers/tournament-resolver.service';
+import { PublicModule } from '../public/public.module';
+import { RegisterComponent } from '../shared/register/register.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild(
       [
         {
@@ -24,6 +28,13 @@ import { TournamentResolverService } from './tournament/resolvers/tournament-res
               resolve: {
                 user: UserResolverService,
                 tournaments: TournamentsResolverService
+              }
+            },
+            {
+              path: 'profile/:id',
+              component: RegisterComponent,
+              resolve : {
+                user: UserResolverService,
               }
             },
             {
