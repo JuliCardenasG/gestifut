@@ -83,6 +83,13 @@
         </div>
         <button class="btn btn-primary mt-4" (click)="setMatchResult()">Establecer resultado del partido</button>
       </div>
+      <div class="row" *ngIf="saved">
+        <div class="col-12">
+          <div class="alert alert-success">
+            <p>Resultado guardado con éxito</p>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>

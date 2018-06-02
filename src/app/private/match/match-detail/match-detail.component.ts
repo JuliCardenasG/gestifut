@@ -16,6 +16,7 @@ export class MatchDetailComponent implements OnInit {
   teams: ITeam[];
   localTeam: ITeam;
   visitorTeam: ITeam;
+  saved = false;
   constructor(private route: ActivatedRoute, private tournamentService: TournamentService,
     private matchService: MatchService, private router: Router) { }
 
@@ -51,7 +52,22 @@ export class MatchDetailComponent implements OnInit {
 
     this.matchService.setMatchResult(matchResultJson).subscribe(
       ok => {
-        this.router.navigate(['/private/tournaments', this.match.tournament_id]);
+        const localScorers = this.localTeam.players.filter(player => player.goals > 0);
+        const visitorScorers = this.visitorTeam.players.filter(player => player.goals > 0);
+        let scorers = [...localScorers, ...visitorScorers];
+        scorers = scorers.map(scorer => {
+          return {
+            match_id: this.match.id,
+            team_id: scorer.team_id,
+            player_id: scorer.id,
+            goals: scorer.goals
+          };
+        });
+        this.matchService.setScorers(scorers).subscribe(
+          okScorers => {
+            this.saved = true;
+          }
+        );
       }
     );
   }

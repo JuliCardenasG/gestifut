@@ -26,4 +26,11 @@ export class MatchService {
       });
   }
 
+  setScorers(scorers): Observable<boolean> {
+    return this.http.post(this.MATCH_URL + 'goalscorers', scorers)
+      .map((resp: any) => {
+        return resp.ok;
+      });
+  }
+
 }
