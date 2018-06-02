@@ -13,6 +13,13 @@ const routes: Route[] = [
     component: TournamentCreateComponent
   },
   {
+    path: 'edit/:id',
+    component: TournamentCreateComponent,
+    resolve: {
+      tournament: TournamentResolverService
+    }
+  },
+  {
     path: ':id',
     component: TournamentDetailComponent,
     resolve: {

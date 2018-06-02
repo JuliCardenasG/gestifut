@@ -5,6 +5,8 @@ import { SERVER_URL } from '../../../app.constants';
 import { ITeam } from '../../team/interfaces/i-team';
 import { TournamentService } from '../services/tournament.service';
 import { IMatch } from '../interfaces/i-match';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteModalComponent } from '../../../shared/modals/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-tournament-detail',
@@ -22,7 +24,7 @@ export class TournamentDetailComponent implements OnInit {
   clasifications;
   readonly IMG_SERVER = SERVER_URL;
   constructor(private route: ActivatedRoute, private tournamentService: TournamentService,
-    private router: Router) { }
+    private router: Router, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.tournament = this.route.snapshot.data.tournament;
@@ -51,12 +53,6 @@ export class TournamentDetailComponent implements OnInit {
     return this.tournament.teams.find(team => team.id == teamId).name;
   }
 
-  deleteTournament() {
-    this.tournamentService.deleteTournament(this.tournament.id).subscribe(
-      ok => this.router.navigate(['/private'])
-    );
-  }
-
   setCurrentMatchday() {
     this.showMatches = this.matches.filter(match => {
       // tslint:disable-next-line:triple-equals
@@ -66,6 +62,26 @@ export class TournamentDetailComponent implements OnInit {
 
   goToMatch(matchId) {
     this.router.navigate(['/private/matches', matchId]);
+  }
+
+  goToTournamentEdit() {
+    this.router.navigate(['/tournament/edit']);
+  }
+
+  deleteTournament() {
+    const modalRef = this.modalService.open(DeleteModalComponent);
+    modalRef.result.then(result => {
+      console.log(result);
+      if (result) {
+        this.tournamentService.deleteTournament(this.tournament.id).subscribe(
+          ok => {
+            if (ok) {
+              this.router.navigate(['/private']);
+            }
+          }
+        );
+      }
+    });
   }
 
   deleteTeam(teamId) {
