@@ -4,6 +4,8 @@ import { IUser } from '../../user/interfaces/i-user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SERVER_URL } from '../../app.constants';
 import { ITournament } from '../tournament/interfaces/i-tournament';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteModalComponent } from '../../shared/modals/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-main',
@@ -17,7 +19,7 @@ export class MainComponent implements OnInit {
   tournaments: ITournament[];
 
   constructor(private authService: AuthService, private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.user = this.route.snapshot.data.user;
@@ -26,6 +28,22 @@ export class MainComponent implements OnInit {
 
   goToProfileEdit() {
     this.router.navigate(['/private/profile/', this.user.id]);
+  }
+
+  deleteProfile () {
+    const modalRef = this.modalService.open(DeleteModalComponent);
+    modalRef.result.then(result => {
+      if (result) {
+        this.authService.deleteProfile(this.user.id).subscribe(
+          ok => {
+            if (ok) {
+              this.authService.logout();
+              this.router.navigate(['/']);
+            }
+          }
+        );
+      }
+    })
   }
 
 }

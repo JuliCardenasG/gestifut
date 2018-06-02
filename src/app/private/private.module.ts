@@ -10,12 +10,14 @@ import { TournamentResolverService } from './tournament/resolvers/tournament-res
 import { PublicModule } from '../public/public.module';
 import { RegisterComponent } from '../shared/register/register.component';
 import { SharedModule } from '../shared/shared.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    NgbModule,
     RouterModule.forChild(
       [
         {

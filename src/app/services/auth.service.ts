@@ -93,6 +93,13 @@ export class AuthService {
       });
   }
 
+  deleteProfile(userId): Observable<boolean> {
+    return this.http.delete(SERVER_URL + 'auth/delete/' + userId)
+      .map((resp: any) => {
+        return resp.ok;
+      });
+  }
+
   logout() {
     localStorage.removeItem('token');
     this.loggedUser = null;

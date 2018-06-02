@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { DeleteModalComponent } from './modals/delete-modal/delete-modal.component';
 
 @NgModule({
   imports: [
@@ -10,9 +11,12 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     RouterModule
   ],
-  declarations: [RegisterComponent],
+  declarations: [RegisterComponent, DeleteModalComponent],
   exports: [
     RegisterComponent
+  ],
+  entryComponents: [
+    DeleteModalComponent
   ]
 })
 export class SharedModule { }

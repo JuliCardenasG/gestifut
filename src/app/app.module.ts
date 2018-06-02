@@ -15,6 +15,8 @@ import { LogoutActivateGuard } from './guards/logout-activate.guard';
 import { TeamResolverService } from './private/team/resolvers/team-resolver.service';
 import { TeamService } from './private/team/services/team.service';
 import { GoogleLoginModule } from './google-login/google-login.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { GoogleLoginModule } from './google-login/google-login.module';
   imports: [
     BrowserModule,
     HttpClientModule,
+    NgbModule.forRoot(),
     GoogleLoginModule.forRoot('185094683124-f6ro8sdi456p08mo8b0p0cudkc64ah26.apps.googleusercontent.com'),
     RouterModule.forRoot(APP_ROUTES, {
       preloadingStrategy: PreloadAllModules
