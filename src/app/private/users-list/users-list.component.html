@@ -1,0 +1,25 @@
+<section class="main">
+  <div class="row">
+    <div class="row col-12">
+      <h3>Usuarios</h3>
+    </div>
+    <div class="d-flex flex-row flex-wrap col-12 my-4" *ngIf="users && users.length > 0">
+      <div *ngFor="let user of users" class="col-12 col-sm-6">
+        <div class="card text-center">
+          <img [src]="IMG_SERVER + user.image" class="tournament-img mx-auto">
+          <div class="card-body">
+            <h5 class="card-title">{{user.name}}</h5>
+            <p class="card-text">{{user.email}}</p>
+            <a class="btn btn-secondary" [routerLink]="['/private/profile/', this.user.id]">Editar perfil</a>
+            <button class="btn btn-danger" (click)="deleteProfile(user.id)">Eliminar usuario</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap col-12" *ngIf="!users || users.length == 0">
+      <div class="bg-alert">
+        <p>No se han encontrado usuarios</p>
+      </div>
+    </div>
+  </div>
+</section>

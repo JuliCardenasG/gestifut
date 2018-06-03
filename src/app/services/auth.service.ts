@@ -105,4 +105,13 @@ export class AuthService {
     this.loggedUser = null;
     this.router.navigate(['/']);
   }
+
+  getUsers(): Observable<IUser[]> {
+    return this.http.get(SERVER_URL + 'users')
+      .map((resp: any) => {
+        if (resp.ok) {
+          return resp.users;
+        }
+      });
+  }
 }

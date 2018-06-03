@@ -11,6 +11,7 @@ import { PublicModule } from '../public/public.module';
 import { RegisterComponent } from '../shared/register/register.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UsersListComponent } from './users-list/users-list.component';
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       ]
     )
   ],
-  declarations: [LayoutComponent, TopMenuComponent, MainComponent],
+  declarations: [LayoutComponent, TopMenuComponent, MainComponent, UsersListComponent],
   providers: [
     TournamentResolverService
   ]
