@@ -30,7 +30,8 @@ import { LoggedUserResolverService } from './user/resolvers/logged-user-resolver
     NgbModule.forRoot(),
     GoogleLoginModule.forRoot('185094683124-f6ro8sdi456p08mo8b0p0cudkc64ah26.apps.googleusercontent.com'),
     RouterModule.forRoot(APP_ROUTES, {
-      preloadingStrategy: PreloadAllModules
+      preloadingStrategy: PreloadAllModules,
+      useHash: true
     })
   ],
   providers: [

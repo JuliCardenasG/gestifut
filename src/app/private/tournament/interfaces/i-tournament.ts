@@ -11,4 +11,5 @@ export interface ITournament {
     teams?: ITeam[];
     matches?: any;
     matchdays?: any;
+    goalscorers?: any;
 }
