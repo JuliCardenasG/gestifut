@@ -10,7 +10,7 @@
       <div class="row" *ngIf="clasifications">
         <div class="row col-12 mb-4">
           <h3>Clasificación</h3>
-          <table class="table table-hover text-center">
+          <table class="table table-striped text-center">
             <thead>
               <tr>
                 <th scope="col">Pos.</th>
@@ -43,7 +43,7 @@
             </select>
           </div>
 
-          <table class="table table-hover text-center">
+          <table class="table table-hover table-pointer text-center">
             <thead>
               <tr>
                 <th scope="col">Equipo local</th>
@@ -58,6 +58,27 @@
                 <td>{{match.team_local_goals}}</td>
                 <td>{{match.team_visitor_goals}}</td>
                 <td>{{getTeamName(match.team_visitor_id)}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row" *ngIf="tournament.goalscorers">
+        <div class="row col-12 mb-4">
+          <h3>Máximos goleadores</h3>
+          <table class="table table-striped text-center">
+            <thead>
+              <tr>
+                <th>Equipo</th>
+                <th>Nombre</th>
+                <th scope="col">Goles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let goalscorer of tournament.goalscorers">
+                <td>{{goalscorer.team}}</td>
+                <td>{{goalscorer.name}}</td>
+                <td>{{goalscorer.goals}}</td>
               </tr>
             </tbody>
           </table>

@@ -9,3 +9,7 @@
     width: 100px;
     height: 100px;
 }
+
+.table-pointer {
+    cursor: pointer;
+}

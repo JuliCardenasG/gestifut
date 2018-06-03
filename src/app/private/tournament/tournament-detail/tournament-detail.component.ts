@@ -22,12 +22,14 @@ export class TournamentDetailComponent implements OnInit {
   matchdays;
   currentMatchdayId;
   clasifications;
+  goalscorers;
   readonly IMG_SERVER = SERVER_URL;
   constructor(private route: ActivatedRoute, private tournamentService: TournamentService,
     private router: Router, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.tournament = this.route.snapshot.data.tournament;
+    console.log(this.tournament);
     this.matches = this.tournament.matches;
     this.currentMatchdayId = this.tournament.matchdays[0].id;
     this.tournamentService.getTournamentClasification(this.tournament.id).subscribe(
