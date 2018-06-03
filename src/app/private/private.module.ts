@@ -41,6 +41,10 @@ import { UsersListComponent } from './users-list/users-list.component';
               }
             },
             {
+              path: 'users',
+              component: UsersListComponent
+            },
+            {
               path: 'tournaments',
               loadChildren: './tournament/tournament.module#TournamentModule'
             },

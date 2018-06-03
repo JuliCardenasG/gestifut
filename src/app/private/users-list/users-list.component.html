@@ -6,7 +6,7 @@
     <div class="d-flex flex-row flex-wrap col-12 my-4" *ngIf="users && users.length > 0">
       <div *ngFor="let user of users" class="col-12 col-sm-6">
         <div class="card text-center">
-          <img [src]="IMG_SERVER + user.image" class="tournament-img mx-auto">
+          <img [src]="SERVER_URL + user.image" class="tournament-img mx-auto">
           <div class="card-body">
             <h5 class="card-title">{{user.name}}</h5>
             <p class="card-text">{{user.email}}</p>

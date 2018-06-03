@@ -40,6 +40,15 @@ export class AuthService {
       .catch(err => Observable.throw(err));
   }
 
+  getUser(userId): Observable<IUser> {
+    return this.http.get(SERVER_URL + 'users/' + userId)
+      .map((resp: any) => {
+        if (resp.ok) {
+          return resp.user;
+        }
+      });
+  }
+
   isLogged(): Observable<boolean> {
     if (!localStorage.getItem('token')) {
       return Observable.of(false);

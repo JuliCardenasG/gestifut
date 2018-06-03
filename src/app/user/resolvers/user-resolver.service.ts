@@ -8,7 +8,8 @@ export class UserResolverService implements Resolve<any>{
   constructor(private authService: AuthService) { }
 
   resolve(route: ActivatedRouteSnapshot): any {
-    return this.authService.getLoggedUser();
+    const userId = route.params.id;
+    return this.authService.getUser(userId);
   }
 
 }

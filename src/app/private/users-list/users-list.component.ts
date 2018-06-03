@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteModalComponent } from '../../shared/modals/delete-modal/delete-modal.component';
 import { Router } from '@angular/router';
+import { SERVER_URL } from '../../app.constants';
 
 @Component({
   selector: 'app-users-list',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 export class UsersListComponent implements OnInit {
 
   users: IUser[];
+  readonly SERVER_URL = SERVER_URL;
   constructor(private authService: AuthService, private modalService: NgbModal,
     private router: Router) { }
 
@@ -29,6 +31,7 @@ export class UsersListComponent implements OnInit {
         this.authService.deleteProfile(userId).subscribe(
           ok => {
             if (ok) {
+              this.users = this.users.filter(user => user.id !== userId);
               this.router.navigate(['/private/users']);
             }
           }

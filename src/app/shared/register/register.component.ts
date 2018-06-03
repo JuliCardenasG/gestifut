@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
       this.authService.register(this.newUser).subscribe(
         ok => {
           if (ok) {
-            this.router.navigate(['/auth/registered']);
+            this.router.navigate(['/private']);
           }
         },
         error => {
