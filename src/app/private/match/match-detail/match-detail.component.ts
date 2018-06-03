@@ -16,12 +16,16 @@ export class MatchDetailComponent implements OnInit {
   teams: ITeam[];
   localTeam: ITeam;
   visitorTeam: ITeam;
+  goalscorers;
+  localGoalscorers;
+  visitorGoalscorers;
   saved = false;
   constructor(private route: ActivatedRoute, private tournamentService: TournamentService,
     private matchService: MatchService, private router: Router) { }
 
   ngOnInit() {
     this.match = this.route.snapshot.data.match;
+    this.goalscorers = this.route.snapshot.data.match.goalscorers;
     console.log(this.match);
     this.tournamentService.getTournamentTeams(this.match.tournament_id).subscribe(
       teams => {
@@ -30,6 +34,8 @@ export class MatchDetailComponent implements OnInit {
         this.localTeam = this.teams.find(team => team.id == this.match.team_local_id);
         // tslint:disable-next-line:triple-equals
         this.visitorTeam = this.teams.find(team => team.id == this.match.team_visitor_id);
+        this.localGoalscorers = this.goalscorers.filter(goalscorer => goalscorer.team == this.localTeam.name);
+        this.visitorGoalscorers = this.goalscorers.filter(goalscorer => goalscorer.team == this.visitorTeam.name);
         console.log(this.teams);
       }
     );
@@ -42,7 +48,7 @@ export class MatchDetailComponent implements OnInit {
 
   setMatchResult() {
     const matchResultJson = {
-      id:  this.match.id,
+      id: this.match.id,
       tournamentId: this.match.tournament_id,
       teamLocalId: this.match.team_local_id,
       teamLocalGoals: this.match.team_local_goals,

@@ -16,11 +16,29 @@
             </div>
             <div class="col-4">
               <!-- <p>{{match.team_local_goals}}</p> -->
-              <input type="number" name="local_goals" [(ngModel)]="match.team_local_goals" class="form-control">
+              <input type="number" [disabled]="goalscorers.length > 0" name="local_goals" [(ngModel)]="match.team_local_goals" class="form-control">
               <!-- <p *ngFor="let localGoalscorer of localGoalscorers">{{localGoalscorer.name}}</p> -->
             </div>
           </div>
-          <div class="row mt-4">
+          <div class="row mt-4" *ngIf="goalscorers.length > 0">
+            <div class="col-12 row">
+              <div class="col-8">
+                <label for="local-scorer">Nombre</label>
+              </div>
+              <div class="col-4">
+                <label for="local-goals">Goles</label>
+              </div>
+            </div>
+            <div class="col-12 row" *ngFor="let goalscorer of localGoalscorers">
+              <div class="col-8">
+                <label>{{goalscorer.name}}</label>
+              </div>
+              <div class="col-4">
+                <label>{{goalscorer.goals}}</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4" *ngIf="!goalscorers.length > 0">
             <div class="row col-12">
               <h5 class="col-12 mx-auto">Goleadores equipo local</h5>
             </div>
@@ -49,13 +67,31 @@
         <div class="col-6">
           <div class="row">
             <div class="col-4">
-              <input type="number" name="visitor_goals" [(ngModel)]="match.team_visitor_goals" class="form-control">
+              <input type="number" [disabled]="goalscorers.length > 0" name="visitor_goals" [(ngModel)]="match.team_visitor_goals" class="form-control">
             </div>
             <div class="col-8">
               <p>{{visitorTeam.name}}</p>
             </div>
           </div>
-          <div class="row mt-4">
+          <div class="row mt-4" *ngIf="goalscorers.length > 0">
+            <div class="col-12 row">
+              <div class="col-4">
+                <label for="local-scorer">Goles</label>
+              </div>
+              <div class="col-8">
+                <label for="local-goals">Nombre</label>
+              </div>
+            </div>
+            <div class="col-12 row" *ngFor="let goalscorer of visitorGoalscorers">
+              <div class="col-4">
+                <label>{{goalscorer.goals}}</label>
+              </div>
+              <div class="col-8">
+                <label>{{goalscorer.name}}</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4" *ngIf="!goalscorers.length > 0">
             <div class="row col-12">
               <h5 class="col-12 mx-auto">Goleadores equipo visitante</h5>
             </div>
@@ -81,7 +117,7 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-primary mt-4" (click)="setMatchResult()">Establecer resultado del partido</button>
+        <button class="btn btn-primary mt-4" (click)="setMatchResult()" *ngIf="!goalscorers.length > 0">Establecer resultado del partido</button>
       </div>
       <div class="row" *ngIf="saved">
         <div class="col-12">
