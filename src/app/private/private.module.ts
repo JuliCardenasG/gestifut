@@ -12,6 +12,7 @@ import { RegisterComponent } from '../shared/register/register.component';
 import { SharedModule } from '../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersListComponent } from './users-list/users-list.component';
+import { LoggedUserResolverService } from '../user/resolvers/logged-user-resolver.service';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { UsersListComponent } from './users-list/users-list.component';
               path: '',
               component: MainComponent,
               resolve: {
-                user: UserResolverService,
+                user: LoggedUserResolverService,
                 tournaments: TournamentsResolverService
               }
             },

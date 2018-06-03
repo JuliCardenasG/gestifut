@@ -16,6 +16,7 @@ import { TeamResolverService } from './private/team/resolvers/team-resolver.serv
 import { TeamService } from './private/team/services/team.service';
 import { GoogleLoginModule } from './google-login/google-login.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { LoggedUserResolverService } from './user/resolvers/logged-user-resolver.service';
 
 
 
@@ -35,6 +36,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   providers: [
     AuthService,
     UserResolverService,
+    LoggedUserResolverService,
     TournamentService,
     TournamentsResolverService,
     LoginActivateGuard,

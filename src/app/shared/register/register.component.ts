@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.userToEdit = this.route.snapshot.data.user;
+    console.log(this.userToEdit);
     if (this.userToEdit) {
       this.name = this.userToEdit.name;
       this.email = this.userToEdit.email;
