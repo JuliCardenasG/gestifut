@@ -14,7 +14,7 @@
       [routerLink]="['/private/tournaments']"
       [routerLinkActive]="['bg-white', 'text-success', 'rounded']">Torneos</a>
     </li>
-    <li class="nav-item ml-4">
+    <li class="nav-item ml-4" *ngIf="user && user.role == 'admin'">
       <a 
       class="nav-link text-white"
       [routerLink]="['/private/users']"

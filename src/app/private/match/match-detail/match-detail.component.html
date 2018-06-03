@@ -38,7 +38,7 @@
               </div>
             </div>
           </div>
-          <div class="row mt-4" *ngIf="!goalscorers.length > 0">
+          <div class="row mt-4" *ngIf="goalscorers.length == 0">
             <div class="row col-12">
               <h5 class="col-12 mx-auto">Goleadores equipo local</h5>
             </div>
@@ -91,7 +91,7 @@
               </div>
             </div>
           </div>
-          <div class="row mt-4" *ngIf="!goalscorers.length > 0">
+          <div class="row mt-4" *ngIf="goalscorers.length == 0">
             <div class="row col-12">
               <h5 class="col-12 mx-auto">Goleadores equipo visitante</h5>
             </div>
@@ -117,7 +117,7 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-primary mt-4" (click)="setMatchResult()" *ngIf="!goalscorers.length > 0">Establecer resultado del partido</button>
+        <button class="btn btn-primary mt-4" (click)="setMatchResult()" *ngIf="goalscorers.length == 0">Establecer resultado del partido</button>
       </div>
       <div class="row" *ngIf="saved">
         <div class="col-12">

@@ -20,6 +20,13 @@ export class TeamDetailComponent implements OnInit {
   ngOnInit() {
     this.team = this.route.snapshot.data.team;
     this.team.players = this.team.players.sort((a, b) => a.number > b.number);
+    console.log(this.team.players);
+    this.team.players = this.team.players.map(player  => {
+      if (!player.goals) {
+        player.goals = 0;
+      }
+      return player;
+    });
     this.newPlayer = {
       name: '',
       number: '',
