@@ -34,7 +34,9 @@ export class MatchDetailComponent implements OnInit {
         this.localTeam = this.teams.find(team => team.id == this.match.team_local_id);
         // tslint:disable-next-line:triple-equals
         this.visitorTeam = this.teams.find(team => team.id == this.match.team_visitor_id);
+        // tslint:disable-next-line:triple-equals
         this.localGoalscorers = this.goalscorers.filter(goalscorer => goalscorer.team == this.localTeam.name);
+        // tslint:disable-next-line:triple-equals
         this.visitorGoalscorers = this.goalscorers.filter(goalscorer => goalscorer.team == this.visitorTeam.name);
         console.log(this.teams);
       }

@@ -4,7 +4,7 @@
       <div class="row">
         <h2 class="col-8">Partido</h2>
         <p class="col-4">
-          <a [routerLink]="['/private/tournaments', match.tournament_id]" class="btn btn-md btn-secondary">Volver al torneo</a>
+          <a [routerLink]="['/private/tournaments', match.tournament_id]" class="btn btn-secondary">Volver al torneo</a>
         </p>
       </div>
       <div class="row bg-light p-4 text-center" *ngIf="teams">
@@ -14,7 +14,7 @@
               <!-- <p>{{getTeamName(match.team_local_id)}}</p> -->
               <p>{{localTeam.name}}</p>
             </div>
-            <div class="col-4">
+            <div class="col-12 col-md-4">
               <!-- <p>{{match.team_local_goals}}</p> -->
               <input type="number" [disabled]="goalscorers.length > 0" name="local_goals" [(ngModel)]="match.team_local_goals" class="form-control">
               <!-- <p *ngFor="let localGoalscorer of localGoalscorers">{{localGoalscorer.name}}</p> -->
@@ -22,7 +22,7 @@
           </div>
           <div class="row mt-4" *ngIf="goalscorers.length > 0">
             <div class="col-12 row">
-              <div class="col-12 col-md-8 d-none d-block-md">
+              <div class="col-12 col-md-8">
                 <label for="local-scorer">Nombre</label>
               </div>
               <div class="col-12 col-md-4">
@@ -53,7 +53,7 @@
                   </div>
                 </div>
                 <div class="row mt-2" *ngFor="let player of localTeam.players; let i = index">
-                  <div class="col-12 col-8-md">
+                  <div class="col-12 col-md-8">
                     <label>{{player.name}}</label>
                   </div>
                   <div class="col-12 col-md-4">
@@ -65,14 +65,14 @@
           </div>
         </div>
         <div class="col-12 col-md-6">
-          <div class="row border-top border-dark d-block d-sm-none my-4">
+          <div class="row border-top border-dark d-md-none my-4">
             
           </div>
           <div class="row">
-            <div class="col-4">
+            <div class="col-12 col-md-4">
               <input type="number" [disabled]="goalscorers.length > 0" name="visitor_goals" [(ngModel)]="match.team_visitor_goals" class="form-control">
             </div>
-            <div class="col-8">
+            <div class="col-12 col-md-8">
               <p>{{visitorTeam.name}}</p>
             </div>
           </div>
@@ -81,7 +81,7 @@
               <div class="col-12 col-md-4">
                 <label for="local-scorer">Goles</label>
               </div>
-              <div class="col-12 col-md-8 d-none d-md-block">
+              <div class="col-12 col-md-8">
                 <label for="local-goals">Nombre</label>
               </div>
             </div>
